@@ -83,8 +83,11 @@ const TextRecognitionScreen = () => {
 
   useFocusEffect(handleAudioFeedback);
 
+  const handleNavigation = () => {
+    router.dispatch(StackActions.replace('home'));
+  };
   return (
-    <Pressable onPress={handleClickPhoto} className="w-full h-full">
+    <Pressable onPress={handleClickPhoto} className="w-full h-full" onLongPress={handleNavigation}>
       <Camera
         ref={camera}
         style={StyleSheet.absoluteFill}
