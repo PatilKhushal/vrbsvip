@@ -1,0 +1,116 @@
+{
+  "welcomeScreen": {
+    "title": "Initial Setup",
+    "audio": [
+      "Welcome to our application VRBSVIP....",
+      "Long Press anywhere on the screen to continue setting up initial configurations"
+    ],
+    "message": [
+      "Welcome !!",
+      "Long Press anywhere on the screen to continue setting up initial configurations"
+    ]
+  },
+
+  "languageSelectionScreen": {
+    "title": "Language Selection",
+    "audio": [
+      "This is First Step, Language Selection",
+      "Press screen twice for English",
+      "मराठीसाठी स्क्रीनवर तीनदा दाबा",
+      "हिंदी के लिए स्क्रीन को चार बार दबाएं"
+    ],
+    "message": [
+      "Press screen twice for English",
+      "मराठीसाठी स्क्रीनवर तीनदा दाबा",
+      "हिंदी के लिए स्क्रीन को चार बार दबाएं"
+    ]
+  },
+
+  "emergencyContactScreen": {
+    "title": "Emergency Contact Setup",
+    "audio": [
+      "This is Second Step, Emergency Contact Selection",
+      "Long Press anywhere on the screen and speak the contact name to continue adding it to Emergency Contacts"
+    ],
+    "message": [
+      "Long Press anywhere on the screen and speak the contact name to continue adding it to Emergency Contacts"
+    ],
+    "yes" : "We have successfully added your contact",
+    "no" : "We have not added the contact",
+    "issue" : "We got issue adding the contact, repeat the process please"
+  },
+
+  "setupCompleteScreen": {
+    "title": "Setup Completion",
+    "audio": [
+      "Initial Setup is Complete",
+      "Now we can start assisting you",
+      "Long Press anywhere to begin"
+    ],
+    "message": [
+      "Initial Setup is Complete",
+      "Now we can start assisting you",
+      "Long Press anywhere to begin"
+    ]
+  },
+
+  "listeningScreen": {
+    "title": "Listening Screen",
+    "audio": [],
+    "message": []
+  },
+
+  "confirmationScreen": {
+    "title": "Confirmation Screen",
+    "audio": [],
+    "message": []
+  },
+
+  "contactViewScreen": {
+    "title": "Contact View",
+    "audio": [],
+    "message": [],
+    "contactFound" : [
+      "Contact {{name}} found, do you want to add it to emergency contacts?",
+      "Speak Yes to confirm and No to cancel"
+    ]
+  },
+
+  "homeScreen": {
+    "title": "Home Screen",
+    "audio": [
+      "You are on the Home Screen",
+      "Long Press and Speak",
+      "one for Object Recognition",
+      "two for Text Recognition",
+      "three for Navigation Assistance"
+    ],
+    "message": [
+      "Long Press and Speak",
+      "one for Object Recognition",
+      "two for Text Recognition",
+      "three for Navigation Assistance"
+    ]
+  },
+
+  "textRecognitionScreen": {
+    "title": "Text Recognition Screen",
+    "audio": [
+      "Welcome to Text Recognition Mode",
+      "Press to click the photo for text recognition purpose"
+    ],
+    "message": []
+  },
+
+  "modeSelectionScreen": {
+    "title": "Mode Selection Screen",
+    "audio": [],
+    "message": []
+  },
+
+  "readTextScreen": {
+    "title": "Read Text Screen",
+    "audio": [],
+    "message": []
+  }
+}

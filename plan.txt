@@ -1,0 +1,14 @@
+long press -----> listens
+
+
+audio feedback speak proceed to move further or speak a name to add it in emergency contacts
+
+Cmd :---->
+	1. Proceed -----> next screen
+	2. else fetch contact and display
+
+contact fetch
+	1. 	single ---> audio feedback for confirmation
+					if user speaks yes add to emergency ones
+					return to initial audio feedback
+	2.	multiple --->
