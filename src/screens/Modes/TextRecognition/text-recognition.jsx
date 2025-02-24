@@ -93,7 +93,7 @@ const TextRecognitionScreen = () => {
         photo={true}
       />
     </Pressable>
-  );
+  ); 
 };
 
 export default TextRecognitionScreen;
