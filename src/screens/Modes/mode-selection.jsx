@@ -11,8 +11,6 @@ import {
 import {useTranslation} from 'react-i18next';
 import Listening from '../../components/Listening';
 import {clearAudioQueues} from '../../services/audioService';
-import {setEmergencyContacts} from '../../reducers/configurations';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ModeSelectionScreen = () => {
   const dispatch = useDispatch();

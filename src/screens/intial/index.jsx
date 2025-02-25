@@ -1,8 +1,7 @@
 import { View, Text, Image, Pressable, ImageBackground } from "react-native";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useRef } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import {
-  setIntervalID,
   setSpeechFinished,
   setTimeoutID,
 } from "../../reducers/configurations";

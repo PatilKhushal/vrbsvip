@@ -18,6 +18,7 @@ import Home from './screens/Modes/Home';
 import ModeSelectionScreen from './screens/Modes/mode-selection';
 import TextRecognitionScreen from './screens/Modes/TextRecognition/text-recognition';
 import ReadText from './screens/Modes/TextRecognition/read-text';
+import ObjectRecognitionScreen from './screens/Modes/ObjectRecognition/object-recognition';
 
 
 const Stack = createNativeStackNavigator();
@@ -54,7 +55,7 @@ const RootLayout = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="text-recognition"
+        initialRouteName="object-recognition"
         screenOptions={{
           headerTintColor: 'white',
           headerStyle: {
@@ -143,6 +144,13 @@ const RootLayout = () => {
           component={ReadText}
           options={{
             title: t('readTextScreen', { returnObjects: true }).title,
+          }}
+        />
+        <Stack.Screen
+          name="object-recognition"
+          component={ObjectRecognitionScreen}
+          options={{
+            title: "Object Recognition",
           }}
         />
         {/* <Stack.Screen

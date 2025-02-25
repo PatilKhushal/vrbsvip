@@ -13,7 +13,7 @@ import {
 } from '../../../reducers/configurations';
 import {clearAudioQueues, speakWithPause} from '../../../services/audioService';
 
-const ReadText = () => {
+const DetectObject = () => {
   const photo = useSelector(state => state.textMode.photo);
   const recognizedText = useSelector(state => state.textMode.recognizedText);
   const recognizedLang = useSelector(state => state.textMode.recognizedLang);
@@ -24,7 +24,7 @@ const ReadText = () => {
   const intervalRef = useRef(intervalID);
   const dispatch = useDispatch();
 
-  const playAudio = () => {
+  /* const playAudio = () => {
     const text = [recognizedText];
     console.log('text :\t', text);
     speakWithPause(dispatch, setSpeechFinished, text, recognizedLang);
@@ -47,13 +47,10 @@ const ReadText = () => {
     };
   }, [dispatch]);
 
-  useFocusEffect(handleAudioFeedback);
-
-  console.log('recognizedText :\n', recognizedText);
-  console.log('recognizedLang :\n', recognizedLang);
+  useFocusEffect(handleAudioFeedback); */
 
   const handleNavigation = () => {
-    router.dispatch(StackActions.replace('text-recognition'));
+    router.dispatch(StackActions.replace('object-recognition'));
   };
 
   return (
@@ -70,4 +67,4 @@ const ReadText = () => {
   );
 };
 
-export default ReadText;
+export default DetectObject;

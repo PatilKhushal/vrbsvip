@@ -3,7 +3,6 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {
   setIntervalID,
-  setLanguage,
   setSpeechFinished,
 } from '../../reducers/configurations';
 import {useDispatch, useSelector} from 'react-redux';

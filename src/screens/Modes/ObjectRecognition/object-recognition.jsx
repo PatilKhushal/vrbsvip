@@ -8,16 +8,14 @@ import {
   useCameraDevice,
   useCameraPermission,
 } from 'react-native-vision-camera';
-/* import MLKitOcr from "react-native-mlkit-ocr"; */
 import {StackActions, useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
-import {setPhoto, setRecognizedText} from '../../../reducers/textMode';
+import {setPhoto} from '../../../reducers/textMode';
 import {clearAudioQueues, speakWithPause} from '../../../services/audioService';
 import { setSpeechFinished, setTimeoutID } from '../../../reducers/configurations';
-import TextRecognition, { TextRecognitionScript } from '@react-native-ml-kit/text-recognition';
 import { useTranslation } from 'react-i18next';
 
-const TextRecognitionScreen = () => {
+const ObjectRecognitionScreen = () => {
   const router = useNavigation();
   const {t} = useTranslation();
   const device = useCameraDevice('back');
@@ -44,18 +42,11 @@ const TextRecognitionScreen = () => {
     dispatch(setPhoto(photo));
 
     console.log('Photo Path :\t', `file://${photo.path}`);
-    const result = await TextRecognition.recognize(
-      `file://${photo.path}`,
-      TextRecognitionScript.DEVANAGARI,
-    )
-    console.log('recognizedText Value:\t', result);
-    dispatch(setRecognizedText(result.text));
-
-    router.dispatch(StackActions.replace('read-text'));
+    router.dispatch(StackActions.replace('detect-object'));
   };
 
   const playAudio = () => {
-    const text = t('textRecognitionScreen', {returnObjects: true}).audio;
+    const text = t('ObjectRecognitionScreen', {returnObjects: true}).audio;
     speakWithPause(dispatch, setSpeechFinished, text, language);
     intervalRef.current = setInterval(() => {
       speakWithPause(dispatch, setSpeechFinished, text, language);
@@ -94,4 +85,4 @@ const TextRecognitionScreen = () => {
   ); 
 };
 
-export default TextRecognitionScreen;
+export default ObjectRecognitionScreen;
