@@ -3,6 +3,7 @@ import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {
   setIntervalID,
+  setLanguage,
   setSpeechFinished,
 } from '../../reducers/configurations';
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,6 +19,7 @@ const LanguageSelection = () => {
   const intervalID = useSelector(state => state.configurations.intervalID);
   const timeoutID = useSelector(state => state.configurations.timeoutID);
   const language = useSelector(state => state.configurations.language);
+  const isFirstTime = useSelector(state => state.configurations.isFirstTime);
   const dispatch = useDispatch();
   const [tapCount, setTapCount] = useState(0);
   const timeoutRef = useRef(timeoutID);
@@ -58,7 +60,7 @@ const LanguageSelection = () => {
   useFocusEffect(handleAudioFeedback);
 
   const handleNavigation = () => {
-    if (isSpeechFinished) {
+    if (isSpeechFinished && isFirstTime) {
       clearTimeout(timeoutRef.current);
 
       setTapCount(tapCount + 1);

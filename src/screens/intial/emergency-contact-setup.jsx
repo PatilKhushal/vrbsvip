@@ -27,15 +27,11 @@ const EmergencyContactSetup = () => {
   const isConfirmation = useSelector(state => state.voice.isConfirmation);
   const isErrorRef = useRef(isError);
   const isConfirmationRef = useRef(isConfirmation);
+    const isFirstTime = useSelector(state => state.configurations.isFirstTime);
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const timeoutRef = useRef(timeoutID);
   const intervalRef = useRef(intervalID);
-
-  useEffect(() => {
-    isErrorRef.current = isError;
-    isConfirmationRef.current = isConfirmation;
-  }, [isError, isConfirmation]);
 
   const playAudio = () => {
     let temp = t('emergencyContactScreen', {returnObjects: true}).audio;
@@ -91,7 +87,7 @@ const EmergencyContactSetup = () => {
   useFocusEffect(handleAudioFeedback);
 
   const handleNavigation = () => {
-    if (isSpeechFinished) {
+    if (isSpeechFinished && isFirstTime) {
       clearAudioQueues(intervalID, timeoutID);
       router.dispatch(StackActions.replace('listening-screen'));
     }

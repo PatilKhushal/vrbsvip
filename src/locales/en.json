@@ -30,7 +30,8 @@
     "title": "Emergency Contact Setup",
     "audio": [
       "This is Second Step, Emergency Contact Selection",
-      "Long Press anywhere on the screen and speak the contact name to continue adding it to Emergency Contacts"
+      "Long Press anywhere on the screen and speak the contact name to continue adding it to Emergency Contacts",
+      "Long Press anywhere on the screen and speak next to move to next screen"
     ],
     "message": [
       "Long Press anywhere on the screen and speak the contact name to continue adding it to Emergency Contacts"
@@ -72,7 +73,7 @@
     "message": [],
     "contactFound" : [
       "Contact {{name}} found, do you want to add it to emergency contacts?",
-      "Speak Yes to confirm and No to cancel"
+      "Long Press and Speak Proceed to confirm and Cancel to cancel"
     ]
   },
 
@@ -81,15 +82,14 @@
     "audio": [
       "You are on the Home Screen",
       "Long Press and Speak",
-      "one for Object Recognition",
-      "two for Text Recognition",
-      "three for Navigation Assistance"
+      "object for Object Recognition",
+      "text for Text Recognition",
+      "navigation for Navigation Assistance"
     ],
     "message": [
-      "Long Press and Speak",
-      "one for Object Recognition",
-      "two for Text Recognition",
-      "three for Navigation Assistance"
+      "Object Recognition",
+      "Text Recognition",
+      "Navigation Assistance"
     ]
   },
 

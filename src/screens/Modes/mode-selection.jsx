@@ -11,6 +11,8 @@ import {
 import {useTranslation} from 'react-i18next';
 import Listening from '../../components/Listening';
 import {clearAudioQueues} from '../../services/audioService';
+import {setEmergencyContacts} from '../../reducers/configurations';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ModeSelectionScreen = () => {
   const dispatch = useDispatch();
@@ -26,7 +28,7 @@ const ModeSelectionScreen = () => {
   useEffect(() => {
     initVoice(dispatch);
   }, [dispatch]);
-  
+
   useEffect(() => {
     console.log('isSRStarted :\t', isSRStarted);
     console.log('isSRFinished :\t', isSRFinished);
@@ -37,12 +39,14 @@ const ModeSelectionScreen = () => {
         switch(mode)
         {
             case "text" : router.dispatch(StackActions.replace('text-recognition'));
-            console.log("Mode one got selected")
+            console.log("Mode text recognition got selected")
             break;
 
             case "home" : router.dispatch(StackActions.replace('home'));
             console.log("Mode home got selected")
             break;
+
+            case "object" : router.dispatch(StackActions.replace('objectRecognition'));
         }
     }
   }, [isSRFinished, mode]);

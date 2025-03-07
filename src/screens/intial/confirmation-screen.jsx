@@ -24,10 +24,11 @@ const ConfirmationScreen = () => {
     state => state.configurations.emergencyContacts,
   );
   const isError = useSelector(state => state.voice.isError);
-  const router = useNavigation();
+  const router = useNavigation(); 
   const {t} = useTranslation();
   const intervalID = useSelector(state => state.configurations.intervalID);
   const timeoutID = useSelector(state => state.configurations.timeoutID);
+  const isFirstTime = useSelector(state => state.configurations.isFirstTime);
   const timeoutRef = useRef(timeoutID);
   const intervalRef = useRef(intervalID);
 
@@ -43,7 +44,7 @@ const ConfirmationScreen = () => {
     console.log('isConfirmation :\t', isConfirmation);
     console.log('emergencyContacts :\t', emergencyContacts);
 
-    if (isSRFinished && isConfirmation == 'true') {
+    if (isFirstTime && isSRFinished && isConfirmation == 'true') {
       const updatedEmergencyContacts = [...emergencyContacts, SR_Result];
       AsyncStorage.setItem('emergencyContacts', updatedEmergencyContacts.toLocaleString())
         .then(() => {
@@ -52,10 +53,10 @@ const ConfirmationScreen = () => {
           console.log('Contact added to emergency contacts');
         })
         .catch(error => console.log(error));
-    } else if ((isSRFinished && isConfirmation == 'false') || isError) {
+    } else if (isFirstTime && ((isSRFinished && isConfirmation == 'false') || isError)) {
       router.dispatch(StackActions.replace('emergency-contact-setup'));
       console.log('Contact not added to emergency contacts');
-    } else if (isSRFinished && isConfirmation == 'neutral')
+    } else if (isFirstTime && isSRFinished && isConfirmation == 'neutral')
       router.dispatch(StackActions.replace('contact-view'));
   }, [SR_Result, isSRFinished, isConfirmation, emergencyContacts]);
 

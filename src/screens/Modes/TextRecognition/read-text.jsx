@@ -1,12 +1,18 @@
-import {Pressable} from 'react-native';
-import React, {useCallback, useRef} from 'react';
+import {View, Text, Pressable, ScrollView} from 'react-native';
+import React, {useCallback, useEffect, useRef} from 'react';
 import {Image} from 'react-native-animatable';
 import {useDispatch, useSelector} from 'react-redux';
+import {setRecognizedLang, setRecognizedText} from '../../../reducers/textMode';
+import TextRecognition, {
+  TextRecognitionScript,
+} from '@react-native-ml-kit/text-recognition';
+import IdentifyLanguages from '@react-native-ml-kit/identify-languages';
 import {
   StackActions,
   useFocusEffect,
   useNavigation,
 } from '@react-navigation/native';
+import {useTranslation} from 'react-i18next';
 import {
   setSpeechFinished,
   setTimeoutID,

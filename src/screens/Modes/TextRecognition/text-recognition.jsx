@@ -1,11 +1,15 @@
-import React, {useRef, useCallback} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {
+  View,
+  Text,
+  TouchableWithoutFeedback,
   StyleSheet,
   Pressable,
 } from 'react-native';
 import {
   Camera,
   useCameraDevice,
+  useCameraDevices,
   useCameraPermission,
 } from 'react-native-vision-camera';
 /* import MLKitOcr from "react-native-mlkit-ocr"; */
@@ -16,6 +20,7 @@ import {clearAudioQueues, speakWithPause} from '../../../services/audioService';
 import { setSpeechFinished, setTimeoutID } from '../../../reducers/configurations';
 import TextRecognition, { TextRecognitionScript } from '@react-native-ml-kit/text-recognition';
 import { useTranslation } from 'react-i18next';
+import { setMode } from '../../../reducers/voice';
 
 const TextRecognitionScreen = () => {
   const router = useNavigation();
@@ -29,12 +34,14 @@ const TextRecognitionScreen = () => {
   const timeoutRef = useRef(timeoutID);
   const intervalRef = useRef(intervalID);
 
-  if (!hasPermission) {
-    console.log('Get the camera permission');
-    requestPermission();
-  }
-  if (device == null) console.log('Device is null');
-  else console.log('device', device);
+  useEffect(() => {
+    if (!hasPermission) {
+      console.log('Get the camera permission');
+      requestPermission()
+    }
+    if (device == null) console.log('Device is null');
+    else console.log('device', device);
+  }, [])
 
   const camera = useRef();
 
@@ -64,7 +71,7 @@ const TextRecognitionScreen = () => {
 
   const handleAudioFeedback = useCallback(() => {
     clearAudioQueues(intervalRef.current, timeoutRef.current);
-
+dispatch(setMode(null))
     timeoutRef.current = setTimeout(() => {
       playAudio();
     }, 500);
@@ -82,15 +89,19 @@ const TextRecognitionScreen = () => {
     router.dispatch(StackActions.replace('home'));
   };
   return (
-    <Pressable onPress={handleClickPhoto} className="w-full h-full" onLongPress={handleNavigation}>
-      <Camera
-        ref={camera}
-        style={StyleSheet.absoluteFill}
-        device={device}
-        isActive={true}
-        photo={true}
-      />
-    </Pressable>
+    <>
+      {
+        hasPermission ? <Pressable onPress={handleClickPhoto} className="w-full h-full" onLongPress={handleNavigation}>
+        <Camera
+          ref={camera}
+          style={StyleSheet.absoluteFill}
+          device={device}
+          isActive={true}
+          photo={true}
+        />
+      </Pressable> : <Text>Give Camera Permission to access</Text>
+      }
+    </>
   ); 
 };
 

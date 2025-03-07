@@ -47,6 +47,7 @@ const Seperator = () => {
 const ContactsView = () => {
   const SR_Result = useSelector((state) => state.voice.SR_Result);
   const language = useSelector((state) => state.configurations.language);
+    const isFirstTime = useSelector(state => state.configurations.isFirstTime);
   const dispatch = useDispatch();
   const router = useNavigation()
   const intervalID = useSelector((state) => state.configurations.intervalID);
@@ -96,7 +97,7 @@ const ContactsView = () => {
   }, [SR_Result]);
 
   const handleNavigation = () => {
-    if (isSpeechFinished) {
+    if (isSpeechFinished && isFirstTime) {
       clearAudioQueues(intervalID, timeoutID);
       router.dispatch(StackActions.replace('confirmation-screen'));
     }

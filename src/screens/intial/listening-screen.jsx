@@ -18,6 +18,7 @@ const ListeningScreen = () => {
   const isSRFinished = useSelector(state => state.voice.isSRFinished);
   const isSRStarted = useSelector(state => state.voice.isSRStarted);
   const isProceedDetected = useSelector(state => state.voice.isProceedDetected);
+    const isFirstTime = useSelector(state => state.configurations.isFirstTime);
   const SR_Result = useSelector(state => state.voice.SR_Result);
   const router = useNavigation();
   const {t} = useTranslation();
@@ -37,12 +38,12 @@ const ListeningScreen = () => {
     console.log('\n\n\n');
     console.log('isProceedDetected :\t', isProceedDetected);
 
-    if (isProceedDetected) {
+    if (isProceedDetected && isFirstTime) {
       router.navigate('setup-completion');
-      dispatch(setProceedDetected(false));
-    } else if (isSRFinished && SR_Result != null && SR_Result.length === 0)
+      dispatch(setProceedDetected(false))
+    } else if (isFirstTime && isSRFinished && SR_Result != null && SR_Result.length === 0)
       router.dispatch(StackActions.replace('emergency-contact-setup'));
-    else if (isSRFinished && SR_Result != null && SR_Result.length > 0)
+    else if (isFirstTime && isSRFinished && SR_Result != null && SR_Result.length > 0)
       router.dispatch(StackActions.replace('contact-view'));
   }, [SR_Result, isProceedDetected, isSRFinished, isSRStarted]);
 

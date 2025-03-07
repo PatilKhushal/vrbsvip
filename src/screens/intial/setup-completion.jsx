@@ -3,6 +3,7 @@ import React, {useCallback, useRef} from 'react';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {
   setIntervalID,
+  setIsFirstTime,
   setSpeechFinished,
   setTimeoutID,
 } from '../../reducers/configurations';
@@ -18,6 +19,8 @@ const SetupCompletion = () => {
   const intervalID = useSelector(state => state.configurations.intervalID);
   const timeoutID = useSelector(state => state.configurations.timeoutID);
   const language = useSelector(state => state.configurations.language);
+    const isFirstTime = useSelector(state => state.configurations.isFirstTime);
+  
   const dispatch = useDispatch();
   const {t} = useTranslation();
   const timeoutRef = useRef(timeoutID);
@@ -53,8 +56,10 @@ const SetupCompletion = () => {
   useFocusEffect(handleAudioFeedback);
 
   const handleNavigation = () => {
-    if (isSpeechFinished) {
+    if (isSpeechFinished && isFirstTime) {
       clearAudioQueues(intervalID, timeoutID);
+      dispatch(setIsFirstTime(false));
+      console.log("inside setup completion")
       router.navigate('home'); // Navigate to the next screen
     }
   };

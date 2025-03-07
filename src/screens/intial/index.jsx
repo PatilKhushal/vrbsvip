@@ -1,7 +1,8 @@
 import { View, Text, Image, Pressable, ImageBackground } from "react-native";
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import {
+  setIntervalID,
   setSpeechFinished,
   setTimeoutID,
 } from "../../reducers/configurations";
@@ -22,7 +23,8 @@ const WelcomePage = () => {
   const { t } = useTranslation();
   const timeoutRef = useRef(timeoutID);
   const intervalRef = useRef(intervalID);
-
+  const isFirstTime = useSelector(state => state.configurations.isFirstTime)
+  console.log("isFirstTime :\t", isFirstTime)
   const playAudio = () => {
     const text = t("welcomeScreen", { returnObjects: true }).audio;
     speakWithPause(dispatch, setSpeechFinished, text, language);
@@ -52,7 +54,7 @@ const WelcomePage = () => {
   }, [isSpeechFinished]) */
 
   const handleNavigation = () => {
-    if (isSpeechFinished) {
+    if (isSpeechFinished && isFirstTime) {
       clearAudioQueues(intervalID, timeoutID);
       router.navigate("language-selection"); // Navigate to the next screen
     }

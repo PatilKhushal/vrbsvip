@@ -34,6 +34,7 @@ const onSpeechError = (e, dispatch) => {
   dispatch(setConfirmation('false'));
   dispatch(setIsError(true));
   dispatch(setMode('home'));
+  dispatch(setProceedDetected(false));
 };
 
 const onSpeechResults = async (e, dispatch) => {
@@ -41,48 +42,50 @@ const onSpeechResults = async (e, dispatch) => {
   dispatch(setSRFinished(true));
   dispatch(setSRStarted(false));
   dispatch(setIsError(false));
-
-  const res = e.value[0];
+  dispatch(setMode(null));
+  
+  const res = e.value[0].toLowerCase();
+  console.log("res :\t", res);
   if (
+    res.includes('next') ||
     res.includes('proceed') ||
-    res.includes('yes') ||
-    res.includes('no') ||
-    res.includes('one') ||
+    res.includes('cancel') ||
+    res.includes('object') ||
     res.includes('text') ||
-    res.includes('three')
+    res.includes('navigation')
   ) {
     let caseCompare = '';
 
-    if (res.includes('proceed')) caseCompare = 'proceed';
-    else if (res.includes('yes')) caseCompare = 'yes';
-    else if (res.includes('no')) caseCompare = 'no';
-    else if (res.includes('one')) caseCompare = 'one';
+    if (res.includes('next')) caseCompare = 'next';
+    else if (res.includes('proceed')) caseCompare = 'proceed';
+    else if (res.includes('cancel')) caseCompare = 'cancel';
+    else if (res.includes('object')) caseCompare = 'object';
     else if (res.includes('text')) caseCompare = 'text';
-    else if (res.includes('three')) caseCompare = 'three';
+    else if (res.includes('navigation')) caseCompare = 'navigation';
 
     switch (caseCompare) {
-      case 'proceed':
+      case 'next':
         dispatch(setProceedDetected(true));
         break;
 
-      case 'yes':
+      case 'proceed':
         dispatch(setConfirmation('true'));
         break;
 
-      case 'no':
+      case 'cancel':
         dispatch(setConfirmation('false'));
         break;
 
-      case 'one':
-        dispatch(setMode('one'));
+      case 'object':
+        dispatch(setMode('object'));
         break;
 
       case 'text':
         dispatch(setMode('text'));
         break;
 
-      case 'three':
-        dispatch(setMode('three'));
+      case 'navigation':
+        dispatch(setMode('navigation'));
         break;
     }
 

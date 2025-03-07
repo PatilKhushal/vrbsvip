@@ -4,7 +4,7 @@ const initialState = {
   isSRFinished: true,
   isSRStarted: false,
   SR_Result: null,
-  isProceedDetected: false,
+  isProceedDetected: null,
   isConfirmation : null,
   isError : false,
   mode : null

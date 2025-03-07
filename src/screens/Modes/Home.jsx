@@ -1,10 +1,13 @@
-import React, {useCallback, useRef} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {View, Text, Pressable, ImageBackground} from 'react-native';
+import Tts from 'react-native-tts';
+import Voice from '@react-native-voice/voice';
 import {StackActions, useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
 import {setSpeechFinished, setTimeoutID} from '../../reducers/configurations';
 import {useDispatch, useSelector} from 'react-redux';
 import {clearAudioQueues, speakWithPause} from '../../services/audioService';
+import { setMode } from '../../reducers/voice';
 
 const Home = () => {
   const router = useNavigation();
@@ -46,7 +49,7 @@ const Home = () => {
   const handleNavigation = () => {
     if (isSpeechFinished) {
       clearAudioQueues(intervalID, timeoutID);
-      router.dispatch(StackActions.replace('mode-selection'));
+      router.navigate('mode-selection');
     }
   };
 
